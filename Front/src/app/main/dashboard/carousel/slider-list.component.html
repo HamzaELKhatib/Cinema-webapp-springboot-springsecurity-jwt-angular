@@ -1,0 +1,98 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+
+    <section class="users-list-wrapper">
+
+
+      <div class="card">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="d-flex justify-content-between align-items-center m-1">
+
+            </div>
+          </div>
+          <div
+            class="
+              col-md-6 col-12
+              d-flex
+              justify-content-start justify-content-md-end
+            "
+          >
+            <div
+              class="
+                d-flex
+                align-items-center
+                justify-content-end
+                pr-1
+                pb-1 pb-md-0
+              "
+            >
+
+              <button
+                (click)="toggleSidebar('new-slider-sidebar')"
+                class="btn btn-primary m-2"
+                rippleEffect
+              >
+                <i
+                  class="d-sm-none d-inline-block mr-0 mr-sm-1"
+                  data-feather="plus"
+                ></i
+                ><span class="d-none d-sm-inline-block">Add New</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>Image</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let slider of rows">
+              <td>
+                <img
+                  [src]="slider.slider_img"
+                  alt="image"
+                  class="mr-75"
+                  height="100"
+                  width="200"
+                />
+              </td>
+              <td width="100%">{{slider.description}}</td>
+
+              <td class="overflow-hidden">
+                <div container="body" ngbDropdown>
+                  <button class="btn btn-sm hide-arrow" data-toggle="dropdown" ngbDropdownToggle type="button">
+                    <i data-feather="more-vertical"></i>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <a (click)="ConfirmColorOpen(slider.id)" ngbDropdownItem
+                    ><i class="mr-50" data-feather="trash"></i><span>Delete</span></a
+                    >
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <core-sidebar
+    class="modal modal-slide-in sidebar-todo-modal fade"
+    name="new-slider-sidebar"
+    overlayClass="modal-backdrop"
+  >
+    <new-slider-sidebar (onItemAdded)="getAll()"></new-slider-sidebar>
+  </core-sidebar>
+</div>

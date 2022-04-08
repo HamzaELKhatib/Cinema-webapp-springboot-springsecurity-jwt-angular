@@ -1,0 +1,186 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- User List -->
+    <section class="users-list-wrapper">
+      <!-- users filter start -->
+      <div class="card">
+        <h5 class="card-header">Search Filter</h5>
+        <div class="card-body">
+          <div class="users-list-filter">
+            <form>
+              <div class="row">
+                <div class="col-12 col-md-4">
+                  <fieldset class="form-group">
+                    <ng-select
+                      (change)="filterByGenre($event)"
+                      [(ngModel)]="selectedGenre"
+                      [items]="genres"
+                      bindLabel="title"
+                      bindValue="id"
+                      name="selectedGenre"
+                      placeholder="Select Genre"
+                    ></ng-select>
+                  </fieldset>
+                </div>
+                <div class="col-12 col-md-4">
+                  <fieldset class="form-group">
+                    <ng-select
+                      (change)="filterByNationality($event)"
+                      [(ngModel)]="selectedNationality"
+                      [items]="nationalities"
+                      bindLabel="title"
+                      bindValue="id"
+                      name="selectedNationality"
+                      placeholder="Select Nationality"
+                    ></ng-select>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- users filter end -->
+
+      <div class="card">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="d-flex justify-content-between align-items-center m-1">
+              <label class="d-flex align-items-center"
+              >Show
+                <select [(ngModel)]="selectedOption" class="form-control mx-25">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                entries</label
+              >
+            </div>
+          </div>
+          <div
+            class="
+              col-md-6 col-12
+              d-flex
+              justify-content-start justify-content-md-end
+            "
+          >
+            <div
+              class="
+                d-flex
+                align-items-center
+                justify-content-end
+                pr-1
+                pb-1 pb-md-0
+              "
+            >
+              <label class="d-flex align-items-center ml-1 ml-md-0"
+              >Search:<input
+                (keyup)="filterUpdate($event)"
+                [(ngModel)]="searchValue"
+                class="form-control ml-25"
+                name="searchValue"
+                type="search"
+              /></label>
+              <a
+                class="btn btn-primary ml-1"
+                rippleEffect
+                routerLink="/dashboard/movies/add"
+              >
+                <i
+                  class="d-sm-none d-inline-block mr-0 mr-sm-1"
+                  data-feather="plus"
+                ></i
+                ><span class="d-none d-sm-inline-block">Add New Movie</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <ngx-datatable
+          [columnMode]="ColumnMode.force"
+          [footerHeight]="50"
+          [headerHeight]="50"
+          [limit]="selectedOption"
+          [rowHeight]="50"
+          [rows]="rows"
+          [scrollbarH]="false"
+          class="bootstrap core-bootstrap"
+        >
+          <ngx-datatable-column
+            [width]="250"
+            name="Title"
+            prop="title"
+          ></ngx-datatable-column>
+
+          <ngx-datatable-column
+            [width]="160"
+            name="Director"
+            prop="director.firstName"
+          ></ngx-datatable-column>
+
+          <ngx-datatable-column
+            [width]="150"
+            name="Release year"
+            prop="releaseYear"
+          ></ngx-datatable-column>
+          <ngx-datatable-column
+            [width]="150"
+            name="Genre"
+            prop="genre.title"
+          ></ngx-datatable-column>
+
+          <ngx-datatable-column
+            [width]="150"
+            name="Nationality"
+            prop="nationality.title"
+          ></ngx-datatable-column>
+          <ngx-datatable-column
+            [width]="150"
+            name="Running time"
+            prop="runtime"
+          ></ngx-datatable-column>
+
+          <ngx-datatable-column [sortable]="false" [width]="100" name="Actions">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <div container="body" ngbDropdown>
+                <button
+                  class="btn icon-btn btn-sm hide-arrow"
+                  ngbDropdownToggle
+                  rippleEffect
+                  type="button"
+                >
+                  <span
+                    [class]="'cursor-pointer'"
+                    [data-feather]="'more-vertical'"
+                  ></span>
+                </button>
+                <div ngbDropdownMenu>
+                  <a
+                    ngbDropdownItem
+                    routerLink="/dashboard/movies/edit/{{ row.id }}"
+                  ><span
+                    [class]="'mr-50'"
+                    [data-feather]="'edit'"
+                    [size]="16"
+                  ></span>
+                    Edit</a
+                  ><a (click)=" ConfirmColorOpen(row.id)"
+                      ngbDropdownItem
+                ><span
+                  [class]="'mr-50'"
+                  [data-feather]="'trash'"
+                  [size]="16"
+                ></span>
+                  Delete</a
+                >
+                </div>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+
+      </div>
+    </section>
+    <!--/ User List -->
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div *ngIf="artist">
+    <div class="movie-backdrop"></div>
+    <div class="container">
+      <div class="movie-data row">
+        <div class="col-md-4">
+          <div class="movie-poster">
+       <img class="img-fluid" src="{{ artist.photoUrl }}" alt="{{ artist.firstName }}" />
+          </div>
+        </div>
+        <div class="col-md-8 bottom-section">
+          <h2 class="movie-title">{{ artist.firstName }} {{ artist.lastName }}</h2>
+          <div class="movie-info">
+          <div  class="movie-details" >
+            <div class="genre-chip">
+                <div class="chip-content">{{artist.type}}</div>
+              </div>
+            <dl class="movie meta-plot">
+              <dt>Bio:</dt>
+              <dd style="color: white">{{ artist.bio }}</dd>
+            </dl>
+            <div class="movie-meta">
+              <dl class="movie meta-director">
+                <dt>Nationality:</dt>
+                <dd>{{ artist.nationality.title }}</dd>
+              </dl>
+              <dl class="movie-meta-runtime">
+                <dt>Born in:</dt>
+                <dd>{{ artist.dateOfBirth }}</dd>
+              </dl>
+            </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

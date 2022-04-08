@@ -1,0 +1,46 @@
+<section class="section1">
+    <!-- intro w background -->
+
+    <img src="assets/img/zgeTuV.jpg"  width="100%" height="100%" no-repeat />
+  
+  </section>
+  <div class="welcomet">
+      <h1 style="background: none; margin-top: -50%;font-size: 300%; font-family: 'Open Sans', sans-serif;">Welcome to CinemaApp</h1>
+</div>
+<div class="indexselection">
+    <section id="about" class="about">
+      <div class="container">
+  
+  
+        <div class="row mt-5">
+          <div class="col-lg-6 col-md-6 mb-3 icon-box">
+            <div class="icon"><i class="bi bi-briefcase"></i></div>
+            <h4 class="title">
+              <button href="">
+                <img src="assets/icons/baseline_search_white_24dp.png"/>
+                <br>Find a Movie or an actor
+              </button>
+            </h4>
+  
+        </div>
+          <div class="col-lg-6 col-md-6 icon-box">
+            <div class="icon"><i class="bi bi-bar-chart"></i></div>
+            <h4 class="title">
+                <button (click)="Press()" >
+                    <img src="assets/icons/baseline_date_range_white_24dp.png"/>
+                    <br>Check our schedule</button>
+            </h4>
+          </div>
+        </div>
+      </div>
+  
+      <!-- dikxi li kitbedel/ the dynamic section -->
+  
+      <div  ng-view></div>
+  
+      <!--  -->
+  
+  
+    </section>
+  </div>
+  

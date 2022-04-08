@@ -1,0 +1,23 @@
+@import 'src/@core/scss/core.scss';
+@import './assets/scss/styles';
+@import 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/scss/bootstrap.min.css';
+@import 'https://use.fontawesome.com/releases/v5.8.1/css/all.css';
+@import "~angular-notifier/styles";
+
+
+body,footer {
+  background: linear-gradient(to bottom, #191919 0, #000 100%) no-repeat #000;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+a {
+  color: #777;
+  transition: all 0.4s;
+}
+
+
+
+                   h1, h2, h3, h4, h5, h6,
+                   .h1, .h2, .h3, .h4, .h5, .h6 {
+                     color: rgba(255, 255, 255, 0.8);
+                   }

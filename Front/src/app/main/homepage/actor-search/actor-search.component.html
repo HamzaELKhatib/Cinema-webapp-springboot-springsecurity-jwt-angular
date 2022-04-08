@@ -1,0 +1,24 @@
+<div  class="search-section">
+    <input type="text"  [(ngModel)]="filterText" class="form-control" placeholder="Search By actor name" (keyup)="getFilteredActors()"/>
+</div>
+
+<div class="movielist">
+        <div class="movielist-data my-5 pb-5 row" *ngFor="let actor of filteredActors">
+          <div class="col-md-3">
+            <div class="movielist-poster">
+              <a routerLink="/home/artists/{{ actor.id }}"
+              ><img class="img-fluid" src="{{ actor.photoUrl }}" alt="{{ actor.id }}"
+              /></a>
+            </div>
+          </div>
+          <div class="actorlist-info col-md-9">
+            <a routerLink="/home/artists/{{ actor.id }}" class="subtitle h3">{{actor.firstName}} {{actor.lastName}}</a>
+            <p class="actorlist-overview">{{ actor.nationality.title }}</p>
+            <div class="actorlist-meta">
+              <dl class="actorlist-meta-cast">
+                <dt>{{actor.type}}</dt>
+              </dl>
+            </div>
+</div>
+        </div>
+    </div>

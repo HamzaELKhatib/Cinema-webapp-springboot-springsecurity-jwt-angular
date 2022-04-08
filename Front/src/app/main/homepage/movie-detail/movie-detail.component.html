@@ -1,0 +1,60 @@
+<div *ngIf="movie">
+    <div class="movie-backdrop" [ngStyle]="{ 'background-image': 'url({{backdropPicture}})}' }"></div>
+    <div class="container">
+      <div class="movie-data row">
+        <div class="col-md-4">
+          <div class="movie-poster">
+            <img class="img-fluid" src="{{ movie.poster }}" alt="{{ movie.title }}" />
+          </div>
+        </div>
+        <div class="col-md-8 bottom-section">
+          <h2 class="movie-title">{{ movie.title }}</h2>
+          <div class="movie-info">
+            <div class="options">
+              <button (click)="DropdownVar=1">Movie Info</button>
+              <button (click)="DropdownVar=2">Gallery</button>
+            </div>
+            <div class="movie-gallery" *ngIf="DropdownVar === 2" >
+              <div class="gallery-container">
+                <h3>Gallery</h3>
+                <div id="gallery" class="galleryDisplay" *ngFor="let photo of movieGallery;let i = index">
+                  <img id="{{i}}" class="galleryImg" src="/../../../../assets/movies/movie{{movie.id}}/{{photo.photoUrl}}" (click)="showPopUp(i)">
+                </div>
+                <div id="popup" (click)="closePopUp()">
+                  <img src="" alt="" id="selectedImage" >
+                </div>
+              </div>
+          </div>
+          <div  class="movie-details" *ngIf="DropdownVar === 1" >
+            <div class="genre-chip">
+                <div class="chip-content">{{movie.genre.title}}</div>
+              </div>
+            <dl class="movie meta-plot">
+              <dt>Summary:</dt>
+              <dd style="color: white">{{ movie.plot }}</dd>
+            </dl>
+            <div class="movie-meta">
+              <dl class="movie meta-director">
+                <dt>Director:</dt>
+                <dd>{{ movie.director.firstName }} {{ movie.director.lastName }}</dd>
+              </dl>
+              <dl class="movie-meta-cast">
+                <dt>Starring:</dt>
+                <div *ngFor="let actor of movie.actors">
+                <dd><a routerLink="/actors/{{ actor.id }}">{{ actor.firstName }} {{ actor.lastName }},  </a></dd>
+              </div>
+              </dl>
+              <dl class="movie-meta-runtime">
+                <dt>Running Time:</dt>
+                <dd>{{ movie.runtime  }} minutes</dd>
+              </dl>
+            </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

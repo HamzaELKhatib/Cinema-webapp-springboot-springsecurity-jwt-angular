@@ -1,0 +1,149 @@
+<div class="content-wrapper container-xxl p-0" >
+    <div class="content-body">
+      <!-- users edit start -->
+      <section class="app-artist-add">
+        <div class="card">
+          <div class="card-body">
+            <div class="container-fluid">
+              <div class="row">
+                <!-- main title -->
+                <div class="col-12">
+                  <div class="main__title">
+                    <h2>Edit artist</h2>
+                  </div>
+                </div>
+                <!-- end main title -->
+  
+                <!-- form -->
+                <div class="col-12">
+                  <form #registerForm="ngForm" (ngSubmit)="onEditArtist(registerForm.value)">
+                    <div class="row row--form">
+                      <div class="col-12 col-md-5 form__cover">
+                        <div class="row row--form">
+                          <div class="col-12 col-sm-12 col-md-12">
+                            <div class="form__img">
+                              <label for="form__img-upload" id="labelPic" hidden
+                                >Upload cover (270 x 400)</label
+                              >
+                              <input
+                                id="form-control form__img-upload"
+                                id="form__img-upload"
+                                type="file"
+                                accept=".png, .jpg, .jpeg"
+                                (change)="onFileChanged($event)"
+                 
+                                
+                              />
+                              <img id="form__img" src="{{artist.photoUrl}}" alt=" " />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                     
+                      <div class="col-12 col-md-7 form__content">
+                        <div class="row row--form">
+                          <div class="col-12">
+                            <div class="form-group">
+                              <label for="artist-firstname">First name</label>
+                              <input
+                                type="text"
+                                id="artist-firstname"
+                                class="form-control"
+                                ngModel name="firstName"
+                                placeholder="First name"
+                                [(ngModel)]="artist.firstName"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="form-group">
+                              <label for="artist-lastname">Last name</label>
+                              <input
+                                type="text"
+                                id="artist-lastname"
+                                class="form-control"
+                                ngModel name="lastName"
+                                placeholder="Last name"
+                                [(ngModel)]="artist.lastName"
+                              />
+                            </div>
+                          </div>
+                         
+                          <div class="col-12">
+                            <div class="form-group">
+                              <label for="artist-bio">Bio</label>
+                              <textarea
+                                id="artist-bio"
+                                ngModel name="bio"
+                                class="form-control"
+                                placeholder="Bio"
+                                [(ngModel)]="artist.bio"
+                              ></textarea>
+                            </div>
+                          </div>
+  
+                          <div class="col-12 col-sm-6 col-lg-6">
+                            <div class="form-group">
+                              <label for="artist-birthday">Birthday</label>
+                              <input
+                                type="date"
+                                id="artist-birthday"
+                                class="form-control"
+                                ngModel name="dateOfBirth"
+                                [(ngModel)]="formattedDate"
+                              />
+                            </div>
+                          </div>
+                          
+                          <div class="col-12 col-sm-6 col-lg-6">
+                            <div class="form-group">
+                              <label for="artist-nationality">Nationality</label>
+                              <select
+                                id="artist-nationality"
+                                class="form-control"
+                                ngModel name="nationality"
+                                [(ngModel)]="artist.nationality.id"
+                                
+                              >
+                              <option 
+                              *ngFor="let natio of nationalities"
+                              [ngValue]="natio">{{natio.title}}</option>
+                            </select>
+                            </div>
+                          </div> 
+                          <div class="col-12 col-sm-12 col-lg-12">
+                            <div class="form-group">
+                              <label for="artist-type">Type</label>
+                              <select
+                                id="artist-type"
+                                class="form-control"
+                                ngModel name="type"
+                                [(ngModel)]="artist.type"
+                              >
+                              <option value="ACTOR">Actor</option>
+                              <option value="DIRECTOR">Director</option>
+                              <option value="WRITER">Writer</option>
+                            </select>
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <button type="submit" class="form-control form__btn" id="add-artist-form"> 
+                              Save
+                            </button>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <!-- end form -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- users edit ends -->
+    </div>
+  </div>
+  

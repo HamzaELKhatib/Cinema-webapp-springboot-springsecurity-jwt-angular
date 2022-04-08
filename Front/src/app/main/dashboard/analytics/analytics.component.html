@@ -1,0 +1,154 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <div class="row match-height">
+      <!-- Statistics Card -->
+      <div class=" col-12">
+        <div class="card card-statistics">
+          <div class="card-header">
+            <h4 class="card-title">Statistics</h4>
+
+          </div>
+          <div class="card-body statistics-body">
+            <div class="row">
+              <div class="col-sm-6 col-xl-3 mb-2 mb-xl-0">
+                <div class="media">
+                  <div class="avatar bg-light-primary mr-2">
+                    <div class="avatar-content">
+                      <i class="avatar-icon" data-feather="video"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{projections.length}}</h4>
+                    <p class="card-text font-small-3 mb-0">Projections</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 mb-2 mb-xl-0">
+                <div class="media">
+                  <div class="avatar bg-light-info mr-2">
+                    <div class="avatar-content">
+                      <i class="avatar-icon" data-feather="user"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{users.length}}</h4>
+                    <p class="card-text font-small-3 mb-0">Users</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3 mb-2 mb-sm-0">
+                <div class="media">
+                  <div class="avatar bg-light-danger mr-2">
+                    <div class="avatar-content">
+                      <i class="avatar-icon" data-feather="film"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{movies.length}}</h4>
+                    <p class="card-text font-small-3 mb-0">Movies</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xl-3">
+                <div class="media">
+                  <div class="avatar bg-light-warning mr-2">
+                    <div class="avatar-content">
+                      <i class="avatar-icon" data-feather="star"></i>
+                    </div>
+                  </div>
+                  <div class="media-body my-auto">
+                    <h4 class="font-weight-bolder mb-0">{{artists.length}}</h4>
+                    <p class="card-text font-small-3 mb-0">Artists</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Statistics Card -->
+    </div>
+
+
+    <div class="row match-height">
+      <div class="col-lg-4 col-md-6 col-12">
+        <div class="card card-transaction">
+          <div class="card-header">
+            <h4 class="card-title">Recently Joined Users</h4>
+            <!-- <i data-feather="more-vertical" class="font-medium-3 cursor-pointer"></i> -->
+          </div>
+          <div class="card-body">
+            <div *ngFor="let user of sortedUsers">
+              <div class="mb-2">
+                <div class="media">
+                  <div class="avatar bg-light-primary rounded avatar-lg">
+                    <img [src]="user.profileImageUrl"/>
+
+                  </div>
+                  <div class="ml-2 media-body">
+                    <h6 class="transaction-title">{{user.fullName}}</h6>
+                    <small>@{{user.username}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-12">
+        <div class="card card-transaction">
+          <div class="card-header">
+            <h4 class="card-title">Recently Added Movies</h4>
+          </div>
+          <div class="card-body">
+            <div *ngFor="let movie of sortedMovies">
+              <div class="mb-2">
+                <div class="media">
+                  <div class="avatar bg-light-primary rounded avatar-lg">
+                    <img [src]="movie.poster"/>
+
+                  </div>
+                  <div class="ml-2 media-body">
+                    <h6 class="transaction-title">{{movie.title}} ({{movie.releaseYear}})</h6>
+                    <small>{{movie.genre.title}} - {{movie.nationality.title}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-12">
+        <div class="card">
+          <div class="card-header flex-column align-items-start">
+            <h4 class="card-title mb-75">Genres</h4>
+            <span class="card-subtitle text-muted">Number of movies by genre  </span>
+          </div>
+          <div class="card-body">
+            <div #apexDonutChartRef id="donut-chart">
+              <apx-chart
+                [chart]="{
+                    height: 350,
+                    width:  apexDonutChartRef.offsetWidth,
+                    type: 'donut'
+                  }"
+                [labels]="apexDonutChart.labels"
+                [legend]="apexDonutChart.legend"
+                [plotOptions]="apexDonutChart.plotOptions"
+                [responsive]="apexDonutChart.responsive"
+                [series]="apexDonutChart.series"
+              ></apx-chart>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

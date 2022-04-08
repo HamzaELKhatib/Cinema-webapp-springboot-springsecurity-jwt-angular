@@ -1,0 +1,160 @@
+<p>IT WORKS</p>
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <!-- User List -->
+      <section class="projections-list-wrapper">
+        <!-- users filter start -->
+        <div class="card">
+          <h5 class="card-header">Search Filter</h5>
+          <div class="card-body">
+            <div class="projections-list-filter">
+              <form>
+                <div class="row">
+                  <div class="col-12 col-md-4">
+                    <fieldset class="form-group">
+                      <ng-select
+                        [items]="movies"
+                        [(ngModel)]="selectedMovie"
+                        name="selectedMovie"
+                        bindLabel="title"
+                        bindValue="id"
+                        placeholder="Select Projection Movie"
+                        (change)="filterByMovie($event)"
+                      ></ng-select>
+                    </fieldset>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <fieldset class="form-group">
+                      <ng-select
+                        [items]="halls"
+                        [(ngModel)]="selectedHall"
+                        name="selectedHall"
+                        bindLabel="name"
+                        bindValue="id"
+                        placeholder="Select Hall"
+                        (change)="filterByHall($event)"
+                      ></ng-select>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- users filter end -->
+  
+        <div class="card">
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <div class="d-flex justify-content-between align-items-center m-1">
+                <label class="d-flex align-items-center"
+                  >Show
+                  <select class="form-control mx-25" [(ngModel)]="selectedOption">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  entries</label
+                >
+              </div>
+            </div>
+            <div
+              class="
+                col-md-6 col-12
+                d-flex
+                justify-content-start justify-content-md-end
+              "
+            >
+              <div
+                class="
+                  d-flex
+                  align-items-center
+                  justify-content-end
+                  pr-1
+                  pb-1 pb-md-0
+                "
+              >
+                <a
+                  class="btn btn-primary ml-1"
+                  rippleEffect
+                  routerLink="/dashboard/projections/add"
+                >
+                  <i
+                    data-feather="plus"
+                    class="d-sm-none d-inline-block mr-0 mr-sm-1"
+                  ></i
+                  ><span class="d-none d-sm-inline-block">Add New Projection</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <ngx-datatable
+            [rows]="rows"
+            [rowHeight]="50"
+            class="bootstrap core-bootstrap"
+            [limit]="selectedOption"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [scrollbarH]="false"
+          >
+            <ngx-datatable-column
+              name="Movie Title"
+              prop="movie.title"
+              [width]="600"
+            ></ngx-datatable-column>
+            
+            <ngx-datatable-column
+              name="Hall Name"
+              prop="hall.name"
+              [width]="160"
+            ></ngx-datatable-column>
+
+            <ngx-datatable-column
+              name="Start Time"
+              prop="startTime"
+              [width]="150"
+            ></ngx-datatable-column>
+  
+            <ngx-datatable-column name="Actions" [sortable]="false" [width]="100">
+              <ng-template ngx-datatable-cell-template let-row="row">
+                <div ngbDropdown container="body">
+                  <button
+                    ngbDropdownToggle
+                    type="button"
+                    class="btn icon-btn btn-sm hide-arrow"
+                    rippleEffect
+                  >
+                    <span
+                      [data-feather]="'more-vertical'"
+                      [class]="'cursor-pointer'"
+                    ></span>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <a
+                      routerLink="../edit/{{ row.id }}"
+                      ngbDropdownItem
+                      ><span
+                        [data-feather]="'edit'"
+                        [size]="16"
+                        [class]="'mr-50'"
+                      ></span>
+                      Edit</a
+                    ><a (click)="onDelete(row.id)" ngbDropdownItem
+                      ><span
+                        [data-feather]="'trash'"
+                        [size]="16"
+                        [class]="'mr-50'"
+                      ></span>
+                      Delete</a
+                    >
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </section>
+      <!--/ User List -->
+    </div>
+  </div>

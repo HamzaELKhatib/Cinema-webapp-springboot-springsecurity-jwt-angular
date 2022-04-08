@@ -1,0 +1,497 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <section class="app-movie-add">
+      <div class="card">
+        <div class="card-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <!-- title -->
+                <div class="main__title">
+                  <h2>Add new movie</h2>
+                </div>
+              </div>
+
+              <!-- form -->
+              <div class="col-12">
+                <form
+                  #movieForm="ngForm"
+                  (ngSubmit)="(addMovie(movieForm))"
+                  class="form-validate"
+                  enctype="multipart/form-data"
+                  method="POST"
+                >
+                  <div class="row row--form">
+                    <!-- Poster -->
+                    <div class="col-12 col-md-5">
+                      <div class="row">
+                        <div class="col-12 col-sm-6 col-md-12">
+                          <div class="form__img">
+                            <label *ngIf="!poster"
+                            >Upload cover</label
+                            >
+
+                            <img [src]="poster" alt="movie poster"/>
+
+
+                          </div>
+                          <div class="col-12">
+                                                        <span
+                                                          *ngIf="movieForm.submitted && !poster"
+                                                          class="invalid-form"
+                                                        >
+                              <small
+                                *ngIf="!poster"
+                                class="form-text text-danger"
+                              >This movie poster is required!</small
+                              >
+                            </span>
+                          </div>
+                          <div class="col-12 d-flex mt-1 px-0">
+
+                            <label class="btn btn-primary mr-75 mb-0" for="change-picture">
+                              <span class="d-none d-sm-block">{{!poster ? 'Upload' : 'Change'}}</span>
+                              <input
+                                (change)="uploadImage($event)"
+                                accept=".png, .jpg, .jpeg"
+                                class="form-control"
+                                hidden
+                                id="change-picture"
+                                type="file"
+
+                              />
+                              <span class="d-block d-sm-none">
+                                <i class="mr-0" data-feather="edit"></i>
+                              </span>
+                            </label>
+
+                            <button (click)="removePoster()" class="btn btn-outline-secondary d-none d-sm-block"
+                                    rippleEffect
+                                    type="button">Remove
+                            </button>
+
+                            <button class="btn btn-outline-secondary d-block d-sm-none">
+                              <i class="mr-0" data-feather="trash-2"></i>
+                            </button>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Details -->
+
+                    <div class="col-12 col-md-7">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label for="movie-title">Title</label>
+                            <input
+                              #TitleRef="ngModel"
+                              class="form-control"
+                              id="movie-title"
+                              name="title"
+                              ngModel
+                              placeholder="Title"
+                              required
+                              type="text"
+                            />
+                            <span
+                              *ngIf="movieForm.submitted && TitleRef.invalid"
+                              class="invalid-form"
+                            >
+                              <small
+                                *ngIf="TitleRef.errors.required"
+                                class="form-text text-danger"
+                              >This field is required!</small
+                              >
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label for="movie-plot">Plot</label>
+                            <textarea
+                              #PLotRef="ngModel"
+                              class="form-control"
+                              id="movie-plot"
+                              name="plot"
+                              ngModel
+                              placeholder="Plot"
+                              required
+                            ></textarea>
+
+                            <span
+                              *ngIf="movieForm.submitted && PLotRef.invalid"
+                              class="invalid-form"
+                            >
+                              <small
+                                *ngIf="PLotRef.errors.required"
+                                class="form-text text-danger"
+                              >This field is required!</small
+                              >
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-4">
+                          <div class="form-group">
+                            <label for="movie-release-year">Release year</label>
+                            <input
+                              #ReleaseYear="ngModel"
+                              class="form-control"
+                              id="movie-release-year"
+                              name="releaseYear"
+                              ngModel
+                              placeholder="Release year"
+                              required
+                              type="number"
+                            />
+
+                            <span
+                              *ngIf="movieForm.submitted && ReleaseYear.invalid"
+                              class="invalid-form"
+                            >
+                              <small
+                                *ngIf="ReleaseYear.errors.required"
+                                class="form-text text-danger"
+                              >This field is required!</small
+                              >
+                            </span>
+
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-4">
+                          <div class="form-group">
+                            <label for="movie-release-year">Running time</label>
+                            <input
+                              #RunTimeRef="ngModel"
+                              class="form-control"
+                              id="movie-running-time"
+                              name="runtime"
+                              ngModel
+                              placeholder="in minutes"
+                              required
+                              type="number"/>
+                            <span
+                              *ngIf="movieForm.submitted && RunTimeRef.invalid"
+                              class="invalid-form"
+                            >
+                              <small
+                                *ngIf="RunTimeRef.errors.required"
+                                class="form-text text-danger"
+                              >This field is required!</small
+                              >
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-4">
+                          <div class="form-group">
+                            <label for="movie-box-office">Box office</label>
+                            <input
+                              class="form-control"
+                              id="movie-box-office"
+                              name="boxOffice"
+                              ngModel
+                              placeholder="Box office"
+                              type="number"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-6">
+                          <div class="form-group">
+                            <label>Genre</label>
+                            <ng-select
+                              #GenreRef="ngModel"
+                              [addTag]="addNewGenre"
+                              [items]="genres"
+                              addTagText="Create New Genre"
+                              bindLabel="title"
+                              name="genre"
+                              ngModel
+                              required
+                            >
+                              >
+                            </ng-select
+                            >
+                            <span
+                              *ngIf="movieForm.submitted && GenreRef.invalid"
+                              class="invalid-form"
+                            >
+                              <small
+                                *ngIf="GenreRef.errors.required"
+                                class="form-text text-danger"
+                              >This field is required!</small
+                              >
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-6">
+                          <div class="form-group">
+                            <label>Nationality</label>
+                            <ng-select
+                              #NatRef="ngModel"
+                              [addTag]="addNewNationality"
+                              [items]="nationalities"
+                              addTagText="Create New Nationality"
+                              bindLabel="title"
+                              name="nationality"
+                              ngModel
+                              required
+                            >
+                            </ng-select>
+                          </div>
+                          <span
+                            *ngIf="movieForm.submitted && NatRef.invalid"
+                            class="invalid-form"
+                          >
+                              <small
+                                *ngIf="NatRef.errors.required"
+                                class="form-text text-danger"
+                              >This field is required!</small
+                              >
+                            </span>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-6">
+                          <label>Director</label>
+
+                          <div class="form-group">
+                            <ng-select
+                              #DirRef="ngModel"
+                              #directorSelect
+                              [items]="directors"
+                              bindLabel="full_name"
+                              name="director"
+                              ngModel
+                              required
+                            >
+                              <ng-template ng-header-tmp>
+                                <button
+                                  (click)="
+                                    newArtistType = 'DIRECTOR';
+                                    toggleSidebar('new-artist-sidebar');
+                                    directorSelect.blur();
+                                    directorSelect.close()
+                                  "
+                                  class="
+                                    btn btn-flat-success
+                                    cursor-pointer
+                                    rounded-0
+                                    text-left
+                                    p-50
+                                    w-100
+                                  "
+                                >
+                                  <i data-feather="plus"></i>
+                                  <span class="align-middle ml-25"
+                                  >Add New Director</span
+                                  >
+                                </button>
+                              </ng-template>
+                            </ng-select>
+
+                            <span
+                              *ngIf="movieForm.submitted && DirRef.invalid"
+                              class="invalid-form"
+                            >
+                              <small
+                                *ngIf="DirRef.errors.required"
+                                class="form-text text-danger"
+                              >This field is required!</small
+                              >
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-6">
+                          <label>Writer</label>
+
+                          <div class="form-group">
+                            <ng-select
+                              #writerSelect
+                              [items]="writers"
+                              bindLabel="full_name"
+                              name="writer"
+                              ngModel
+                            >
+                              >
+                              <ng-template ng-header-tmp>
+                                <button
+                                  (click)="
+                                    newArtistType = 'WRITER';
+                                    toggleSidebar('new-artist-sidebar');
+                                    writerSelect.blur();
+                                    writerSelect.close()
+                                  "
+                                  class="
+                                    btn btn-flat-success
+                                    cursor-pointer
+                                    rounded-0
+                                    text-left
+                                    p-50
+                                    w-100
+                                  "
+                                >
+                                  <i data-feather="plus"></i>
+                                  <span class="align-middle ml-25"
+                                  >Add New Writer</span
+                                  >
+                                </button>
+                              </ng-template>
+                            </ng-select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 mb-2 mt-2">
+                      <label for="movie-actors">Actors</label>
+                      <ng-select
+                        #ActorsRef="ngModel"
+                        #actorsSelect
+                        [items]="actors"
+                        [multiple]="true"
+                        bindLabel="full_name"
+                        name="actors"
+                        ngModel
+                        required
+                      >
+                        <ng-template ng-header-tmp>
+                          <button
+                            (click)="
+                              newArtistType = 'ACTOR';
+                              toggleSidebar('new-artist-sidebar');
+                              actorsSelect.blur();
+                              actorsSelect.close()
+                            "
+                            class="
+                              btn btn-flat-success
+                              cursor-pointer
+                              rounded-0
+                              text-left
+                              p-50
+                              w-100
+                            "
+                          >
+                            <i data-feather="plus"></i>
+                            <span class="align-middle ml-25"
+                            >Add New Actor</span
+                            >
+                          </button>
+                        </ng-template>
+                      </ng-select>
+
+                      <span
+                        *ngIf="movieForm.submitted && ActorsRef.invalid"
+                        class="invalid-form"
+                      >
+                              <small
+                                *ngIf="ActorsRef.errors.required"
+                                class="form-text text-danger"
+                              >This field is required!</small
+                              >
+                            </span>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="row row--form">
+                        <div class="col-12 mb-2">
+                          <label for="file-upload">Upload photos</label>
+                          <div class="custom-file">
+                            <input
+                              [uploader]="uploader"
+                              accept=".png, .jpg, .jpeg"
+                              class="custom-file-input"
+                              id="file-upload"
+                              ng2FileSelect
+
+                              type="file"
+                            />
+                            <label class="custom-file-label">Choose file</label>
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="uploader.queue.length > 0"
+                          class="col-12 mb-2"
+                        >
+                          <table class="table">
+                            <thead>
+                            <tr>
+                              <th width="100%">Name</th>
+                              <th>Size</th>
+                              <th>Progress</th>
+                              <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr *ngFor="let item of uploader.queue">
+                              <td>
+                                <strong>{{ item?.file?.name }}</strong>
+                              </td>
+
+                              <td *ngIf="uploader.options.isHTML5" nowrap>
+                                {{
+                                item?.file?.size / 1024 / 1024
+                                  | number: ".2"
+                                }}
+                                MB
+                              </td>
+                              <td *ngIf="uploader.options.isHTML5">
+                                <ngb-progressbar
+                                  [value]="item.progress"
+                                  type="primary"
+                                ></ngb-progressbar>
+                              </td>
+
+                              <td nowrap>
+
+                                <button
+                                  (click)="item.remove()"
+                                  class="
+                                      btn btn-raised btn-outline-danger btn-sm
+                                    "
+                                  rippleEffect
+                                  type="button"
+                                >
+                                  <i data-feather="trash"></i>
+                                </button>
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="col-12">
+                          <button [disabled]="isSavingMovie"
+                                  class="btn btn-primary w-100" rippleEffect type="submit">
+                            publish
+                          </button>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- end form -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <core-sidebar
+    class="modal modal-slide-in sidebar-todo-modal fade"
+    name="new-artist-sidebar"
+    overlayClass="modal-backdrop"
+  >
+    <new-artist-sidebar (onArtistAdded)="getAllArtists()" [type]="newArtistType"></new-artist-sidebar>
+  </core-sidebar>
+</div>

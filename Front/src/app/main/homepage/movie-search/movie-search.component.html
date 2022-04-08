@@ -1,0 +1,41 @@
+<div class="search-section">
+  <ul class="movielist-filters">
+    <li >
+      <a class="selected" (click)="DropdownVar=1" style="color: white">Title</a>
+     </li>
+    <li>
+      <a class="selected" (click)="DropdownVar=2" style="color: white">Genre</a>
+    </li>
+  </ul>
+  <!--
+  <div class="search-type">
+    <button (click)="DropdownVar=1">Title</button>
+    <button (click)="DropdownVar=2">Genre</button>
+  </div>-->
+  <div class="search-title" *ngIf="DropdownVar === 1" >
+    <input type="text"  [(ngModel)]="filterText" class="form-control" placeholder="Search By Movie Title" (keyup)="getFilteredMovies()"/>
+</div>
+<div class="search-genre" *ngIf="DropdownVar === 2">
+  <div class="genre-chip" >
+    <button class="chip-content"   (click)="getFilteredMoviesByGenre('All')">All</button>
+  </div>
+  <div class="genre-chip" *ngFor="let genre of genres">
+    <button class="chip-content"  (click)="getFilteredMoviesByGenre(genre.title)">{{genre.title}}</button>
+  </div>
+</div>
+</div>
+
+    <div class="py-3">
+      <div class="container">
+    <div class="moviegrid">
+      <div class="row">
+        <div *ngFor="let movie of filteredMovies" class="moviegrid-item col-md-3">
+          <a routerLink="/home/movies/{{ movie.id }}">
+            <img src="{{ movie.poster }}" alt="{{ movie.title }}" class="moviegrid-poster img-fluid" />
+            <span class="moviegrid-title">{{ movie.title }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

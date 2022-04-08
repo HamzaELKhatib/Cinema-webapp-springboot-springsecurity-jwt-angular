@@ -1,0 +1,66 @@
+<div *ngIf="horizontalMenu" class="navbar-header d-xl-block d-none">
+  <!-- Navbar brand -->
+  <ul class="nav navbar-nav flex-row">
+    <li class="nav-item">
+      <a [routerLink]="['/']" class="navbar-brand">
+        <span class="brand-logo">
+          <img alt="brand-logo" src="{{ coreConfig.app.appLogoImage }}" width="36"/>
+        </span>
+        <h2 class="brand-text mb-0">{{ coreConfig.app.appName }}</h2>
+      </a>
+    </li>
+  </ul>
+  <!--/ Navbar brand -->
+</div>
+
+<div class="navbar-container d-flex content">
+  <div class="bookmark-wrapper d-flex align-items-center">
+    <!-- Menu Toggler | Menu icon will be hidden in case of layout without menu -->
+    <ul *ngIf="!coreConfig.layout.menu.hidden" class="nav navbar-nav d-xl-none">
+      <li class="nav-item">
+        <a (click)="toggleSidebar('menu')" class="nav-link menu-toggle">
+          <span [class]="'ficon'" [data-feather]="'menu'"></span>
+        </a>
+      </li>
+    </ul>
+    <!--/ Menu Toggler -->
+
+
+  </div>
+
+  <ul class="nav navbar-nav align-items-center ml-auto">
+
+
+    <!-- User Dropdown -->
+    <li class="nav-item dropdown-user" ngbDropdown>
+      <a
+        aria-expanded="false"
+        aria-haspopup="true"
+        class="nav-link dropdown-toggle dropdown-user-link"
+        id="dropdown-user"
+        id="navbarUserDropdown"
+        ngbDropdownToggle
+      >
+        <div class="user-nav d-sm-flex d-none">
+          <span class="user-name font-weight-bolder">{{currentUser.firstName}} {{currentUser.lastName}}</span><span
+          class="user-status">@{{currentUser.username}}</span>
+        </div>
+        <span class="avatar"
+        ><img
+          [src]="currentUser.profileImageUrl"
+          alt="avatar"
+          class="round"
+          height="40"
+          src="../../../../assets/images/portrait/small/avatar-s-11.jpg"
+          width="40"/><span class="avatar-status-online"></span
+        ></span>
+      </a>
+      <div aria-labelledby="navbarUserDropdown" class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+        <a [routerLink]="['/pages/authentication/login-v2']" ngbDropdownItem (click)="logout()"
+        ><span [class]="'mr-50'" [data-feather]="'power'" ></span> Logout</a
+        >
+      </div>
+    </li>
+    <!--/ User Dropdown -->
+  </ul>
+</div>

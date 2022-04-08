@@ -1,0 +1,166 @@
+<div class="slideout-content">
+  <!-- Modal to Add artist starts-->
+  <div class="modal-slide-in new-user-modal" id="modals-slide-in">
+    <div class="modal-dialog">
+      <div class="modal-content p-0">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="toggleSidebar('new-artist-sidebar')"
+        >
+          ×
+        </button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title">
+            <span class="align-middle">Add new {{ type | lowercase }}</span>
+          </h5>
+        </div>
+
+        <div class="modal-body flex-grow-1">
+          <form (ngSubmit)="(newArtistForm.form.valid)" #newArtistForm="ngForm">
+            <div class="form-group">
+              <label for="artist-firstname" class="form-label">First Name</label>
+              <input
+                ngModel
+                name="firstName"
+                type="text"
+                class="form-control"
+                id="artist-firstname"
+                required
+                #FirstNameRef="ngModel"
+              />
+              <span
+                *ngIf="newArtistForm.submitted && FirstNameRef.invalid"
+                class="invalid-form"
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="FirstNameRef.errors.required"
+                  >This field is required!</small
+                >
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="artist-lastname" class="form-label">Last Name</label>
+              <input
+                ngModel
+                name="lastName"
+                type="text"
+                class="form-control"
+                id="artist-lastname"
+                required
+                #LastNameRef="ngModel"
+              />
+              <span
+                *ngIf="newArtistForm.submitted && LastNameRef.invalid"
+                class="invalid-form"
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="LastNameRef.errors.required"
+                  >This field is required!</small
+                >
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="artist-dateOfBirth" class="form-label"
+                >Date of birth</label
+              >
+              <ng2-flatpickr
+                ngModel
+                id="artist-dateOfBirth"
+                [config]="dateOptions"
+                name="dateOfBirth"
+                #DobRef="ngModel"
+                required
+              ></ng2-flatpickr>
+              <span
+                *ngIf="newArtistForm.submitted && DobRef.invalid"
+                class="invalid-form"
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="DobRef.errors.required"
+                >This field is required!</small
+                >
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label>Nationality</label>
+              <ng-select
+                ngModel
+                [items]="nationalities"
+                bindLabel="title"
+                name="nationality"
+                addTagText="Add New Nationality"
+                [addTag]="addNewNationality"
+                #NationalityRef="ngModel"
+                required
+              >
+              </ng-select>
+              <span
+                *ngIf="newArtistForm.submitted && NationalityRef.invalid"
+                class="invalid-form"
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="NationalityRef.errors.required"
+                  >This field is required!</small
+                >
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label  class="form-label">Artist Type</label>
+              <ng-select
+                [items]="artist_types"
+                bindLabel="name"
+                bindValue="value"
+                #TypeRef="ngModel"
+                name="type"
+                [(ngModel)]="type"
+                required
+              >
+              </ng-select>
+              <span
+                *ngIf="newArtistForm.submitted && TypeRef.invalid"
+                class="invalid-form"
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="TypeRef.errors.required"
+                  >This field is required!</small
+                >
+              </span>
+            </div>
+
+            <div class="form-group d-flex flex-wrap mt-2">
+              <button
+                type="submit"
+                class="btn btn-primary mr-1"
+                (click)="submit(newArtistForm)"
+                rippleEffect
+              >
+                Add
+              </button>
+              <button
+                type="reset"
+                class="btn btn-outline-secondary"
+                (click)="toggleSidebar('new-artist-sidebar')"
+                rippleEffect
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal to Add artist Ends-->
+</div>

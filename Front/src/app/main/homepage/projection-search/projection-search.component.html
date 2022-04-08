@@ -1,0 +1,61 @@
+<div class="search-section">
+  <div class="container py-5">
+      <ul class="movielist-filters">
+      <li >
+        <a class="selected" (click)="getFilteredProjectionsByDate(1)">Today</a>
+       </li>
+      <li>
+        <a (click)="getFilteredProjectionsByDate(2)">Tomorrow</a>
+      </li>
+        <input type="date" min="{{minDatePicker}}" [(ngModel)]="pickedDateValue" (change)="getFilteredProjectionsByDate(3)" style="background: white">
+    </ul>
+     <!--   <button (click)="getFilteredProjectionsByDate(1)">TODAY</button>
+        <button  (click)="getFilteredProjectionsByDate(2)">TOMORROW</button>
+        <input type="date" min="{{minDatePicker}}" [(ngModel)]="pickedDateValue" (change)="getFilteredProjectionsByDate(3)">
+-->
+
+
+
+    <div class="movielist">
+        <div class="movielist-data my-5 pb-5 row" *ngFor="let projection of filteredProjections">
+          <div class="col-md-3">
+            <div class="movielist-poster">
+               <a routerLink="/home/movies/{{ projection.movie.id }}"
+                ><img class="img-fluid" src="{{ projection.movie.poster }}" alt="{{ projection.movie.title }}"
+              /></a>
+            </div>
+          </div>
+          <div class="movielist-info col-md-9">
+             <a routerLink="/home/movies/{{ projection.movie.id }}" class="subtitle h3">{{projection.movie.title}}</a>
+            <p class="movielist-overview" style="color: white">{{ projection.movie.plot }}</p>
+            <div class="movielist-meta">
+              <dl class="movielist-meta-cast">
+                <dt>Starring:</dt>
+                <div *ngFor="let actor of projection.movie.actors">
+                  <dd><a routerLink="/artists/{{ actor.id }}">{{ actor.firstName }} {{ actor.lastName }},  </a></dd>
+                </div>
+              </dl>
+              <dl class="movielist-meta-runtime">
+                <dt>Running Time:</dt>
+                <dd>{{ projection.movie.runtime }}</dd>
+              </dl>
+              <dl class="movielist-meta-runtime">
+                <dt>Hall: </dt>
+                <dd>{{ projection.hall.name }}</dd>
+              </dl>
+              <dl class="movielist-meta-runtime">
+                <dt>Start time: </dt>
+                <dd>{{ projection.startTime| date: "HH:MM" }}</dd>
+              </dl>
+            </div>
+</div>
+        </div>
+ <!--     <pagination-controls
+      responsive="true"
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange($event)">
+    </pagination-controls>-->
+    </div>
+  </div>
+  </div>

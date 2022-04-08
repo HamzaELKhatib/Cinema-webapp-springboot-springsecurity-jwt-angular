@@ -1,0 +1,16 @@
+button{
+    transition: transform 0.3s;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+    border: transparent;
+}
+button:hover{
+    transition: transform 0.3s;
+    -ms-transform: scale(1.15);
+    -webkit-transform: scale(1.15);
+    transform: scale(1.15);
+}
+button:focus {outline:0;}

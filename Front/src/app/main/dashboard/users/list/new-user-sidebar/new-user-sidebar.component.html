@@ -1,0 +1,130 @@
+<div class="slideout-content">
+  <!-- Modal to add new user starts-->
+  <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
+    <div class="modal-dialog">
+      <form #newUserForm="ngForm" (ngSubmit)="(newUserForm.form.valid)" class="add-new-user modal-content pt-0">
+        <button
+          (click)="toggleSidebar('new-user-sidebar')"
+          aria-label="Close"
+          class="close"
+          data-dismiss="modal"
+          type="button"
+        >
+          ×
+        </button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+        </div>
+        <div class="modal-body flex-grow-1">
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-firstname">Firstname</label>
+            <input
+              #FNameRef="ngModel"
+              [class.error]="newUserForm.submitted && FNameRef.invalid"
+              class="form-control"
+              name="firstName"
+              ngModel
+              required
+              type="text"
+            />
+            <span *ngIf="newUserForm.submitted && FNameRef.invalid" class="invalid-form">
+              <small *ngIf="FNameRef.errors.required" class="form-text text-danger">This field is required!</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Lastname</label>
+            <input
+              #LastNameRef="ngModel"
+              [class.error]="newUserForm.submitted && LastNameRef.invalid"
+              class="form-control"
+              name="lastName"
+              ngModel
+              required
+              type="text"
+            />
+            <span *ngIf="newUserForm.submitted && LastNameRef.invalid" class="invalid-form">
+              <small *ngIf="LastNameRef.errors.required" class="form-text text-danger">This field is required!</small>
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input
+              #UserNameRef="ngModel"
+              [class.error]="newUserForm.submitted && UserNameRef.invalid"
+              aria-describedby="basic-icon-default-uname2"
+              class="form-control"
+              name="username"
+              ngModel
+              required
+              type="text"
+            />
+            <span *ngIf="newUserForm.submitted && UserNameRef.invalid" class="invalid-form">
+              <small *ngIf="UserNameRef.errors.required" class="form-text text-danger">This field is required!</small>
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input
+              #EmailRef="ngModel"
+              [class.error]="newUserForm.submitted && EmailRef.invalid"
+
+              class="form-control"
+
+              name="email"
+              ngModel
+              required
+              type="text"
+            />
+
+            <span *ngIf="newUserForm.submitted && EmailRef.invalid" class="invalid-form">
+              <small *ngIf="EmailRef.errors.required" class="form-text text-danger">This field is required!</small>
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-password">Password</label>
+            <input
+              #PasswordRef="ngModel"
+              aria-describedby="basic-icon-default-password"
+              aria-label="Password"
+              class="form-control dt-password"
+              id="basic-icon-default-password"
+              name="password"
+              ngModel
+              required
+              type="password"
+            />
+            <span *ngIf="newUserForm.submitted && PasswordRef.invalid" class="invalid-form">
+              <small *ngIf="PasswordRef.errors.required" class="form-text text-danger">This field is required!</small>
+            </span>
+            <small class="form-text text-muted"> You can use letters, numbers & periods </small>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="user-role">Role</label>
+            <select class="form-control" id="user-role">
+              <option value="ROLE_USER">User</option>
+              <option value="ROLE_ADMIN">Admin</option>
+            </select>
+          </div>
+
+          <button (click)="submit(newUserForm)" [disabled]="isAddingUser" class="btn btn-primary mr-1" rippleEffect
+                  type="submit">Submit
+          </button>
+          <button
+
+            (click)="toggleSidebar('new-user-sidebar')"
+            class="btn btn-outline-secondary"
+            rippleEffect
+            type="reset"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Modal to add new user Ends-->
+</div>
